@@ -1,0 +1,92 @@
+/* Dark mode */
+body {
+  background-color: #101D23;
+  color: #EDEDED;
+}
+
+/* Navigation bar */
+.navbar {
+  background-color: #075E54;
+}
+
+.navbar-brand {
+  color: #EDEDED;
+}
+
+.nav-link {
+  color: #EDEDED;
+}
+
+.nav-link:hover {
+  color: #DCF8C6;
+}
+
+/* Sidebar */
+.sidebar-nav {
+  background-color: #128C7E;
+}
+
+.sidebar-nav li a {
+  color: #EDEDED;
+}
+
+.sidebar-nav li a:hover {
+  color: #DCF8C6;
+}
+
+/* Content area */
+.container-fluid {
+  background-color: #0e7d36;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #25D366;
+  border-color: #25D366;
+}
+
+.btn-primary:hover {
+  background-color: #DCF8C6;
+  border-color: #DCF8C6;
+}
+
+/* Links */
+a {
+  color: #25D366;
+}
+
+a:hover {
+  color: #DCF8C6;
+}
+
+/* Forms */
+.form-control {
+  background-color: #DCF8C6;
+  color: #101D23;
+}
+
+.form-control:focus {
+  background-color: #EDEDED;
+  color: #101D23;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #128C7E;
+  color: #EDEDED;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode toggle button icon */
+.dark-mode-icon {
+  width: 20px;
+  height: 20px;
+  fill: #EDEDED;
+}
