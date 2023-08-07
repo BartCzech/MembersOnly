@@ -1,29 +1,42 @@
-extends layout 
+extends layout
 
-block content 
-    if errors 
-        ul 
-            for error in errors 
+block content
+    if errors
+        ul
+            for error in errors
                 li!= error.msg
     if title
         h1=title
 
     form(method='POST' action='')
         div.form-group
-            label(for='name') Name: 
+            label(for='name') Name:
             input#name.form-control(type='text' placeholder='Alexander, Bart etc.'
-            name='name' required='true' value=(undefined===user ? '' : user.name))
-            label(for='surname') Surname: 
+                name='name' required='true' value=(undefined === user ? '' : user.name))
+            label(for='surname') Surname:
             input#surname.form-control(type='text' placeholder='Czech, Peterson etc.'
-            name='surname' required='true' value=(undefined===user ? '' : user.surname))
-            label(for='email') Email: 
+                name='surname' required='true' value=(undefined === user ? '' : user.surname))
+            label(for='email') Email:
             input#email.form-control(type='email'
-            name='email' value=(undefined===user ? '' : user.email))
-        div.form-group   
-            label(for='password') Password: 
-            input#password.form-control(type='password' name='password' )
-            label(for='confirm_password') Confirm password: 
-            input#confirm_password.form-control(type='password' name='confirm_password'))
+                name='email' value=(undefined === user ? '' : user.email))
+        div.form-group
+            label(for='password') Password:
+            input#password.form-control(type='password' name='password')
+            label(for='confirm_password') Confirm password:
+            input#confirm_password.form-control(type='password' name='confirm_password')
+            span(id='password-mismatch-message') Passwords do not match.
+            button.btn.btn-primary(type='submit' onclick='return checkPasswordMatch()') Submit
 
-            button.btn.btn-primary(type='submit') Submit
-
+    script.
+        function checkPasswordMatch() {
+            var password = document.getElementById('password').value;
+            var confirm_password = document.getElementById('confirm_password').value;
+            var mismatchMessage = document.getElementById('password-mismatch-message');
+            if (password !== confirm_password) {
+                mismatchMessage.style.display = 'block';
+                return false;
+            } else {
+                mismatchMessage.style.display = 'none';
+                return true;
+            }
+        }

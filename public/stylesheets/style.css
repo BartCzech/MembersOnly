@@ -90,3 +90,14 @@ a:hover {
   height: 20px;
   fill: #EDEDED;
 }
+
+#password-mismatch-message {
+  color: rgb(255, 40, 40);
+  display: none;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-shadow: 0 0 4px #000;
+}
+
