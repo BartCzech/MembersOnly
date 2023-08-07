@@ -1,36 +1,52 @@
-const User = require('../models/userModel');
-const Message = require('../models/messageModel');
+const User = require("../models/userModel");
+const Message = require("../models/messageModel");
 const asyncHandler = require("express-async-handler");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
 exports.sign_up_get = asyncHandler(async (req, res, next) => {
-    res.render('sign-up');
+  res.render("sign-up", {title: "Sign up page"});
 });
 
 exports.sign_up_post = asyncHandler(async (req, res, next) => {
-    try {
-        const userEmailExists = await User.find({email: req.body.email});
-        if (userEmailExists) {
-            throw new Error('E-mail already in use.');
-        }
-        bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-            if (err) {
-                return next(err);
-            } else {
-                const user = new User({
-                    name: req.body.name,
-                    surname: req.body.surname,
-                    email: req.body.email,
-                    password: hashedPassword,
-                    isPro: false,
-                });
-                await user.save();
-                res.redirect('/');
-            }
+  const errors = validationResult(req);
+  try {
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+      if (err) {
+        return next(err);
+      } else {
+        const user = new User({
+          name: req.body.name,
+          surname: req.body.surname,
+          email: req.body.email,
+          password: hashedPassword,
+          isPro: false,
         });
-    } catch (error) {
-        return next(error);
-    }
+        if (!errors.isEmpty()) {
+          res.render("sign-up", {
+            errors: errors,
+            user: user,
+            title: "errors occurred.",
+          });
+          return;
+        } else {
+          const emailExists = await User.findOne({ email: req.body.email })
+            .collation({ locale: "en", strength: 2 })
+            .exec();
+          if (emailExists) {
+            res.render("sign-up", {
+              user: user,
+              title: "Email already used. Choose a different email or log in to your account.",
+            });
+          } else {
+            await user.save();
+            res.redirect("/");
+          }
+        }
+      }
+    });
+  } catch (error) {
+    return next(error);
+  }
 });
