@@ -26,6 +26,12 @@ app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(function(req, res, next) { // function for accessing the currentUser variable in all the views
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

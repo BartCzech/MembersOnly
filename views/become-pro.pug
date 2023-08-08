@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    if errors
+        ul
+            for error in errors
+                li!= error.msg
+    if title
+        h1=title
+
+    h3 In order to be able to post and see messages, please enter the secret password:
+    form(method='POST' action='')
+        div.form-group
+            label(for='password') Password:
+            input#password.form-control(type='password' name='password')
+            button.btn.btn-primary(type='submit' onclick='return checkPasswordMatch()') Submit
+

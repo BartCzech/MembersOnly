@@ -5,7 +5,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
-exports.sign_up_get = asyncHandler(async (req, res, next) => {
+exports.sign_up_get = asyncHandler(async (req, res) => {
   res.render("sign-up", {title: "Sign up page"});
 });
 
@@ -48,5 +48,15 @@ exports.sign_up_post = asyncHandler(async (req, res, next) => {
     });
   } catch (error) {
     return next(error);
+  }
+});
+
+exports.become_pro_get = asyncHandler(async (req, res) => {
+  res.render("become-pro", {title: "Become pro"});
+});
+
+exports.become_pro_post = asyncHandler(async (req, res, next) => {
+  if (req.body.password == process.env.SECRET_PASSWORD) {
+    console.log("Password hacked");
   }
 });
