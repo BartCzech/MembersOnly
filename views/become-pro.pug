@@ -3,6 +3,7 @@ extends layout
 block content
     if errors
         ul
+            p Errors occurred during processing this website!
             for error in errors
                 li!= error.msg
     if title

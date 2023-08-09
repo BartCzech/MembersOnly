@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
 exports.sign_up_get = asyncHandler(async (req, res) => {
-  res.render("sign-up", {title: "Sign up page"});
+  res.render("sign-up", { title: "Sign up page" });
 });
 
 exports.sign_up_post = asyncHandler(async (req, res, next) => {
@@ -37,7 +37,8 @@ exports.sign_up_post = asyncHandler(async (req, res, next) => {
           if (emailExists) {
             res.render("sign-up", {
               user: user,
-              title: "Email already used. Choose a different email or log in to your account.",
+              title:
+                "Email already used. Choose a different email or log in to your account.",
             });
           } else {
             await user.save();
@@ -52,7 +53,7 @@ exports.sign_up_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.log_in_get = asyncHandler(async (req, res) => {
-  res.render("log-in", {title: "Log in"});
+  res.render("log-in", { title: "Log in" });
 });
 
 exports.log_out_get = asyncHandler(async (req, res) => {
@@ -65,11 +66,28 @@ exports.log_out_get = asyncHandler(async (req, res) => {
 });
 
 exports.become_pro_get = asyncHandler(async (req, res) => {
-  res.render("become-pro", {title: "Become pro"});
+  res.render("become-pro", { title: "Become pro" });
 });
 
-exports.become_pro_post = asyncHandler(async (req, res, next) => {
-  if (req.body.password == process.env.SECRET_PASSWORD) {
-    console.log("Password hacked");
-  }
-});
+exports.become_pro_post = [
+  body("password").escape(),
+  asyncHandler(async (req, res, next) => {
+    if (req.body.password == process.env.SECRET_PASSWORD) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res.render("become-pro", {
+          title: "Become pro",
+          errors: errors.array(),
+        });
+      } else {
+        await User.findByIdAndUpdate(
+          res.locals.currentUser._id.valueOf(),
+          { isPro: true }
+        );
+      }
+      console.log("Password hacked!");
+      console.log(res.locals.currentUser._id.valueOf());
+      res.redirect('/');
+    }
+  }),
+];
