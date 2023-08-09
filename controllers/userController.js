@@ -20,7 +20,7 @@ exports.sign_up_post = asyncHandler(async (req, res, next) => {
           name: req.body.name,
           surname: req.body.surname,
           email: req.body.email,
-          password: hashedPassword,
+          password: req.body.password,
           isPro: false,
         });
         if (!errors.isEmpty()) {
@@ -49,6 +49,10 @@ exports.sign_up_post = asyncHandler(async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
+});
+
+exports.log_in_get = asyncHandler(async (req, res) => {
+  res.render("log-in", {title: "Log in"});
 });
 
 exports.become_pro_get = asyncHandler(async (req, res) => {

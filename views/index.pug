@@ -2,6 +2,13 @@ extends layout
 
 block content
   h1= title
-  p Welcome to the site! 
-  a(class='nav-link', href='/users/sign-up') Sign up
-  a(class='nav-link', href='/users/log-in') Log in
+  if user 
+    h4 Welcome back, #{user.name}!
+  else
+    h4 Welcome to the site! 
+
+  if user
+    a(class='nav-link', href='/users/log-out') Log out
+  else 
+    a(class='nav-link', href='/users/sign-up') Sign up
+    a(class='nav-link', href='/users/log-in') Log in
