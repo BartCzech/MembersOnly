@@ -20,7 +20,7 @@ exports.sign_up_post = asyncHandler(async (req, res, next) => {
           name: req.body.name,
           surname: req.body.surname,
           email: req.body.email,
-          password: req.body.password,
+          password: hashedPassword,
           isPro: false,
         });
         if (!errors.isEmpty()) {
