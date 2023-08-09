@@ -55,6 +55,15 @@ exports.log_in_get = asyncHandler(async (req, res) => {
   res.render("log-in", {title: "Log in"});
 });
 
+exports.log_out_get = asyncHandler(async (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 exports.become_pro_get = asyncHandler(async (req, res) => {
   res.render("become-pro", {title: "Become pro"});
 });
