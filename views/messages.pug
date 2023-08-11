@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title 
+
+  if messages
+    ul
+        each message in messages
+          li
+            h2= message.title
+            p= message.text
+            p Timestamp: #{message.timestamp}
+            if message.author
+              p Author: #{message.author.name} #{message.author.surname}

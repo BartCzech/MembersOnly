@@ -13,6 +13,7 @@ const LocalStrategy = require("passport-local").Strategy;
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var messagesRouter = require("./routes/messages");
 
 dotenv.config();
 connectDB();
@@ -64,12 +65,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use(function (req, res, next) {
-//   // function for accessing the currentUser variable in all the views
-//   res.locals.currentUser = req.user;
-//   next();
-// });
-
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -83,6 +78,7 @@ app.use(function (req, res, next) {
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/messages", messagesRouter);
 app.post(
   "/users/log-in",
   passport.authenticate("local", {

@@ -21,12 +21,14 @@ html(lang='en')
       div(class='collapse navbar-collapse', id='navbarSupportedContent')
         ul(class='navbar-nav mr-auto')
           li(class='nav-item')
-            a(class='nav-link', href='/') Home
-          li(class='nav-item')
-            a(class='nav-link', href='/users/become-pro') Become pro
-          li(class='nav-item')
-            hr
-          li(class='nav-item')
+            a(class='nav-link', href='/messages') Home - messages
+          if user
+            if user.isPro == false
+              li(class='nav-item')
+                a(class='nav-link', href='/users/become-pro') Become pro
+            if user.isPro == true
+              li(class='nav-item')
+                a(class='nav-link', href='/messages/create-message') Create a message
 
     div(class='container-fluid')
       div(class='row')
