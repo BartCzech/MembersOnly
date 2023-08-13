@@ -18,7 +18,10 @@ block content
             //- Hidden confirmation div
             .confirmation-div(data-message-id=message.id style="display: none;")
               p Are you sure?
-              button.confirm-delete-button(data-message-id=message.id) Yes, delete this message.
+              form(method='POST' action='')
+                div.form-group
+                  input#messageid.form-control(type='hidden' name='messageid' required='true' value=message._id)
+                button.confirm-delete-button(type='submit') Yes, delete this message.
 
   script.
     const deleteButtons = document.querySelectorAll('.delete-button');

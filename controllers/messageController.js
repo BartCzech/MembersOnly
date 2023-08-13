@@ -43,3 +43,8 @@ exports.messages_get = asyncHandler(async (req, res) => {
     });
   }
 });
+
+exports.messages_delete_post = asyncHandler(async (req, res) => {
+  await Message.findByIdAndRemove(req.body.messageid);
+  res.redirect("/messages");
+});
