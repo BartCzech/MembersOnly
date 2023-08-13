@@ -4,11 +4,11 @@ block content
   h1= title 
 
   if messages
-    ul
-        each message in messages
-          li
-            h2= message.title
-            p= message.text
-            p Date posted: #{message.timestamp}
-            if message.author
-              p Author: #{message.author.name} #{message.author.surname}
+    ul.message-list
+      each message in messages
+        li.message-box
+          h2.message-title= message.title
+          p.message-text= message.text
+          p.message-timestamp Date posted: #{message.timestamp.toLocaleString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}
+          if message.author
+            p.message-author Author: #{message.author.name} #{message.author.surname}
