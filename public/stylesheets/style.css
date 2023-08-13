@@ -135,3 +135,42 @@ a:hover {
   padding: 0;
   font-style: italic;
 }
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px; /* Rounded edges */
+  cursor: pointer;
+}
+
+/* Style for confirmation div */
+.confirmation-div {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Rounded edges */
+}
+
+/* Style for confirmation message */
+.confirmation-div p {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+/* Style for confirm delete button */
+.confirm-delete-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px; /* Rounded edges */
+  cursor: pointer;
+}
+
+/* Style for confirm delete button on hover */
+.confirm-delete-button:hover {
+  background-color: #c0392b;
+}

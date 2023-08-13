@@ -12,3 +12,34 @@ block content
           p.message-timestamp Date posted: #{message.timestamp.toLocaleString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}
           if message.author
             p.message-author Author: #{message.author.name} #{message.author.surname}
+          if user.isAdmin
+            button.delete-button(data-message-id=message.id) Delete Message
+
+            //- Hidden confirmation div
+            .confirmation-div(data-message-id=message.id style="display: none;")
+              p Are you sure?
+              button.confirm-delete-button(data-message-id=message.id) Yes, delete this message.
+
+  script.
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    const confirmationDivs = document.querySelectorAll('.confirmation-div');
+    const confirmDeleteButtons = document.querySelectorAll('.confirm-delete-button');
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const messageId = button.getAttribute('data-message-id');
+        const confirmationDiv = document.querySelector(`.confirmation-div[data-message-id="${messageId}"]`);
+        const confirmDeleteButton = document.querySelector(`.confirm-delete-button[data-message-id="${messageId}"]`);
+
+        button.style.display = 'none';
+        confirmationDiv.style.display = 'block';
+
+        confirmDeleteButton.addEventListener('click', () => {
+          // Here you can implement the code to delete the message
+          // For example, you can use an AJAX request to send a delete request to the server
+          // After successful deletion, you can remove the message box from the DOM
+          const messageBox = document.querySelector(`.message-box[data-message-id="${messageId}"]`);
+          messageBox.parentNode.removeChild(messageBox);
+        });
+      });
+    });
