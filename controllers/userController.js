@@ -22,6 +22,7 @@ exports.sign_up_post = asyncHandler(async (req, res, next) => {
           email: req.body.email,
           password: hashedPassword,
           isPro: false,
+          isAdmin: false,
         });
         if (!errors.isEmpty()) {
           res.render("sign-up", {
