@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   if user 
-    h4 Welcome back, #{user._id}!
+    h4 Welcome back, #{user.name} #{user.surname}!
   else
     h4 Welcome to the site! 
 
